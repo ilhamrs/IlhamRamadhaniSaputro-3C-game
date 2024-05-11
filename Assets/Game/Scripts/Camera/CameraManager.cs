@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 
 public class CameraManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField]
     private InputManager _inputManager;
+
+    public Action OnChangePerspective;
     private void Start()
     {
         _inputManager.OnChangePOV += SwitchCamera;
@@ -36,6 +39,8 @@ public class CameraManager : MonoBehaviour
             _tpsCamera.gameObject.SetActive(true);
             _fpsCamera.gameObject.SetActive(false);
         }
+
+        OnChangePerspective();
     }
     public void SetFPSClampedCamera(bool isClamped, Vector3 playerRotation)
     {
