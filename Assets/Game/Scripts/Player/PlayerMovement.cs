@@ -75,6 +75,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private LayerMask _hitLayer;
 
+    [SerializeField]
+    private PlayerAudioManager _playerAudioManager;
+
 
     private Rigidbody _rigidbody;
     private float _rotationSmoothVelocity;
@@ -319,6 +322,8 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("IsGliding", true);
 
             _cameraManager.SetFPSClampedCamera(true, transform.rotation.eulerAngles);
+
+            _playerAudioManager.PlayGlideSfx();
         }
     }
     private void CancelGlide()
@@ -330,6 +335,8 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("IsGliding", false);
 
             _cameraManager.SetFPSClampedCamera(false, transform.rotation.eulerAngles);
+
+            _playerAudioManager.StopGlideSfx();
         }
     }
     private void Glide()
